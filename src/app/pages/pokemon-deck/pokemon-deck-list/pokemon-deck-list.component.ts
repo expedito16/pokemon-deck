@@ -34,5 +34,10 @@ export class PokemonDeckListComponent implements OnInit {
 
   editDeck() { }
 
-  deleteDeck() { }
+  deleteDeck(id: number) {
+    this.service.deleteDeckPokemon(id).subscribe((dados: any) => {
+      this.decksList = dados;
+      this.router.navigate(['']);
+    })
+  }
 }

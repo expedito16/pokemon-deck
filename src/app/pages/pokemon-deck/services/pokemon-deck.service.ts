@@ -24,4 +24,8 @@ export class PokemonDeckService {
   createNewDeckPokemon(deckPokemon: any): Observable<any> {
     return this.http.post(this.url, deckPokemon);
   }
+
+  deleteDeckPokemon(id: number): Observable<any>{
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }
