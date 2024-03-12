@@ -33,7 +33,9 @@ export class PokemonDeckListComponent implements OnInit {
     this.router.navigate(['pokemon-deck-details', id]);
   }
 
-  editDeck() { }
+  updateDeck(id: number) {
+    this.router.navigate(['update-pokemon-deck', id]);
+  }
 
   deleteDeck(id: number) {
     this.service.deleteDeckPokemon(id).subscribe((dados: any) => {
