@@ -9,7 +9,7 @@ import { PokemonDeckDetailsComponent } from './pokemon-deck-details/pokemon-deck
 const routes: Routes = [
   { path: '', component: PokemonDeckListComponent },
   { path: 'create-pokemon-deck', component: CreatePokemonDeckComponent },
-  { path: 'pokemon-deck-details', component: PokemonDeckDetailsComponent }
+  { path: 'pokemon-deck-details/:id', component: PokemonDeckDetailsComponent }
 ];
 
 @NgModule({
