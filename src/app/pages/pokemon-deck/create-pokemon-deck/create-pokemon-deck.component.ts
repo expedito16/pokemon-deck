@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PokemonDeckService } from '../services/pokemon-deck.service';
+import { PokemonDeckService } from '../pokemon-deck.service';
 
 @Component({
   selector: 'app-create-pokemon-deck',

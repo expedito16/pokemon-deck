@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PokemonDeckService } from '../services/pokemon-deck.service';
+import { PokemonDeckService } from '../pokemon-deck.service';
 
 @Component({
   selector: 'app-pokemon-deck-details',

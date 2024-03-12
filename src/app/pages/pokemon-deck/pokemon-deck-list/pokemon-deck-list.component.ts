@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PokemonDeckService } from '../services/pokemon-deck.service';
+import { PokemonDeckService } from '../pokemon-deck.service';
 
 @Component({
   selector: 'app-pokemon-deck-list',
@@ -25,12 +25,13 @@ export class PokemonDeckListComponent implements OnInit {
 
   displayDeckList() {
     this.service.decksPokemonList().subscribe((result: any) => {
-      console.log("result: ", result);
       this.decksList = result;
     })
   }
 
-  viewDeck() { }
+  viewDeckDetails(id: number) {
+    this.router.navigate(['pokemon-deck-details', id]);
+  }
 
   editDeck() { }
 

@@ -21,7 +21,7 @@
         <td class="px-6 py-4 whitespace-nowrap">{{ deck.deckName }}</td>
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
           <div class="flex justify-start space-x-2">
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" (click)="viewDeck()">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" (click)="viewDeckDetails(deck.id)">
               Visualizar
             </button>
             <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 rounded" (click)="editDeck()">
