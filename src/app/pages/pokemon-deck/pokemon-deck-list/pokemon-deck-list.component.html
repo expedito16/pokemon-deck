@@ -1,1 +1,40 @@
-<p>pokemon-deck-list works!</p>
+<header class="flex flex-col sm:flex-row items-center justify-between py-4 px-8 bg-gray-800 text-white">
+  <h3 class="text-1xl md:text-2xl lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-0">Lista de baralhos de Pokémon</h3>
+  <button
+    class="px-4 py-2 bg-green-500 hover:bg-green-600 rounded text-white font-semibold text-sm sm:text-base lg:text-base xl:text-lg"
+    (click)="createNewDeck()"
+  >
+    Criar novo baralho
+  </button>
+</header>
+
+<div class="overflow-x-auto py-10 px-10 mb-5">
+  <table class="w-full divide-y divide-gray-200">
+    <thead>
+      <tr class="bg-gray-200 text-center">
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome dos Baralhos</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let deck of decksList" class="border-b border-gray-200 ">
+        <td class="px-6 py-4 whitespace-nowrap">{{ deck.deckName }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+          <div class="flex justify-start space-x-2">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" (click)="viewDeck()">
+              Visualizar
+            </button>
+            <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-2 rounded" (click)="editDeck()">
+              Editar
+            </button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded" (click)=" deleteDeck()">
+              Excluir
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>

@@ -1,1 +1,74 @@
-<p>create-pokemon-deck works!</p>
+<div class="shadow md:shadow-md md:shadow-lg md:shadow-xl md:w-7/12 lg:w-9/12 mt-10 mb-10 p-10 shadow-lg-solid mx-auto">
+  <h1 class="text-2xl md:text-2xl lg:text-4xl text-center font-semibold mb-5">Novo Baralho</h1>
+  <form class=" flex flex-col" [formGroup]="form">
+    <div class="flex flex-col mt-4 mb-4">
+      <label class="block mb-2 text-sm font-bold">Nome do baralho*:</label>
+      <input
+        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+        type="text"
+        name="deckName"
+        formControlName="deckName"
+      >
+    </div>
+    <span
+      *ngIf="form.hasError('required', 'deckName') && form.controls['deckName'].dirty"
+      class="text-red-500"
+    >
+      *Nome do baralho é obrigatorio!
+    </span>
+
+
+      <label class="block mb-2 text-sm font-bold">Selecionar cartas*:</label>
+      <div class="flex items-center flex-wrap mb-5">
+      <div class="w-full sm:w-1/3 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2" *ngFor="let deck of getDecksList; let i = index;">
+        <label for="image1" src='https://images.pokemontcg.io/dp3/1_hires.png'></label>
+        <input
+          class="form-checkbox h-5 w-5 inline-block align-middle mr-1"
+          id="image1"
+          type="checkbox"
+          name="{{deck.name}}"
+          [value]="deck.name"
+          (change)="onCheckboxChange($event)"
+        >
+        <label>{{deck.name}}</label>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-4">
+      <button
+        class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded mr-3 sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/5"
+        (click)="cancel()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded ml-3 sm:w-full md:w-1/3 lg:w-1/4"
+        [disabled]="form.invalid"
+        [class.disabled]="form.invalid"
+        (click)="save()"
+      >
+        Salvar
+      </button>
+    </div>
+
+
+    <!-- <div class="flex justify-center mt-4">
+      <button
+        class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded mr-3"
+        (click)="cancel()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded ml-3"
+        [disabled]="form.invalid"
+        [class.disabled]="form.invalid"
+        (click)="save()"
+      >
+        Salvar
+      </button>
+    </div> -->
+  </form>
+</div>
