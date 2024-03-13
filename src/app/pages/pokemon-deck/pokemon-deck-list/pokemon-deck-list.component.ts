@@ -37,10 +37,16 @@ export class PokemonDeckListComponent implements OnInit {
     this.router.navigate(['update-pokemon-deck', id]);
   }
 
-  deleteDeck(id: number) {
-    this.service.deleteDeckPokemon(id).subscribe((dados: any) => {
-      this.decksList = dados;
-      this.router.navigate(['']);
-    })
+  deleteDeck(event: any, id: number) {
+    if (confirm('Deseja excluir o baralho ?')) {
+      event.target.innerText = "Deleting..."
+      this.service.deleteDeckPokemon(id).subscribe(() => {
+        this.displayDeckList();
+        event.target.innerText = "Deleted"
+      }, error => {
+        console.error(error);
+        event.target.innerText = "Delete"
+      });
+    }
   }
 }
