@@ -9,6 +9,7 @@ import { PokemonDeckService } from '../pokemon-deck.service';
 })
 export class PokemonDeckListComponent implements OnInit {
   decksList: any[] = [];
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -24,8 +25,10 @@ export class PokemonDeckListComponent implements OnInit {
   }
 
   displayDeckList() {
+    this.loading = true;
     this.service.decksPokemonList().subscribe((result: any) => {
       this.decksList = result;
+      this.loading = false;
     })
   }
 
@@ -39,13 +42,16 @@ export class PokemonDeckListComponent implements OnInit {
 
   deleteDeck(event: any, id: number) {
     if (confirm('Deseja excluir o baralho ?')) {
+      this.loading = true;
       event.target.innerText = "Deleting..."
       this.service.deleteDeckPokemon(id).subscribe(() => {
         this.displayDeckList();
         event.target.innerText = "Deleted"
+        this.loading = false;
       }, error => {
         console.error(error);
         event.target.innerText = "Delete"
+        this.loading = false;
       });
     }
   }
