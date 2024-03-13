@@ -3,17 +3,20 @@ import { CommonModule } from '@angular/common';
 
 //Components
 import { FooterComponent } from './footer/footer.component';
+import { LoadingComponent } from './loading/loading.component';
 
 
 @NgModule({
   declarations: [
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    FooterComponent
+    FooterComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
