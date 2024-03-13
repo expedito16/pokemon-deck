@@ -11,7 +11,8 @@ import { PokemonDeckService } from '../pokemon-deck.service';
 export class CreatePokemonDeckComponent implements OnInit {
   form!: FormGroup;
   decksList: any[] = [];
-  getDecksList: any[] = []
+  getDecksList: any[] = [];
+  getDeckName: any[] = [];
   loading: boolean = false;
 
   constructor(
@@ -34,49 +35,58 @@ export class CreatePokemonDeckComponent implements OnInit {
 
   getAlldecksPokemonList() {
     this.loading = true;
+    this.service.decksPokemonList().subscribe((result: any) => {
+      this.getDeckName = result;
+    });
+
     this.service.getAllDecksPokemon().subscribe((result: any) => {
       this.getDecksList = result.data;
-      this.loading = false;
+      this.loading = false
     }, error => {
       console.error(error);
-      this.loading = false;
-    })
+    });
   }
+
+  checkDuplicateDeckNames(): boolean {
+    const deckName = this.form.get('deckName')?.value;
+    const count = this.getDeckName.filter((result: any) => result.deckName === deckName).length;
+    return count >= 4 ? (alert("Só é possível repetir o nome do baralho 4 vezes."), true) : false;
+  }
+
 
   onCheckboxChange(e: any) {
     const checkedValue = e.target.value;
     const checked = e.target.checked;
     const deck = this.getDecksList.find(deck => deck.name === checkedValue);
     const checkArray: FormArray = this.form.get('decksList') as FormArray;
-    if (checked) {
-      checkArray.push(new FormControl(deck));
-    } else {
-      let i: number = 0;
-      checkArray.controls.forEach((item: any) => {
-        if (item.value == deck) {
-          checkArray.removeAt(i);
-        }
-        i++;
-      });
-    }
+
+    checked
+      ? checkArray.push(new FormControl(deck))
+      : checkArray.controls.forEach((item: any, i: number) => {
+          if (item.value == deck) {
+            checkArray.removeAt(i);
+          }
+        });
   }
+
 
   cancel() {
     this.router.navigate(['']);
   }
 
   save() {
-    if (this.form.valid) {
+    if (this.form.valid && !this.checkDuplicateDeckNames()) {
       this.loading = true;
+
       const deckName = this.form.get('deckName')!.value;
       const decksList = this.form.get('decksList')!.value;
-      const newPokemonDeck = {deckName: deckName, decksList: decksList }
+      const newPokemonDeck = {deckName: deckName, decksList: decksList };
+
       this.service.createNewDeckPokemon(newPokemonDeck).subscribe((result: any) => {
         this.router.navigate(['']);
-      },
-      (error) => {
+      }, (error) => {
         console.error(error);
-      }).add(() => {
+      }, () => {
         this.loading = false;
       });
     }
