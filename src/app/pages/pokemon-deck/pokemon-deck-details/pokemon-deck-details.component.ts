@@ -11,6 +11,7 @@ export class PokemonDeckDetailsComponent implements OnInit {
   id: number = 0
   deckName: any[] = [];
   dataDeck: any[] = [];
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,6 +20,7 @@ export class PokemonDeckDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.viewDeckInformation();
   }
 
@@ -28,6 +30,10 @@ export class PokemonDeckDetailsComponent implements OnInit {
     this.service.getDecksPokemonById(this.id).subscribe((data: any) => {
       this.deckName = data.deckName;
       this.dataDeck = data.decksList;
+      this.loading = false;
+    }, error => {
+      console.error(error);
+      this.loading = false;
     });
   }
 
