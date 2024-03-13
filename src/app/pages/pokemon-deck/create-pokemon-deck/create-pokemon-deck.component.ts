@@ -12,6 +12,7 @@ export class CreatePokemonDeckComponent implements OnInit {
   form!: FormGroup;
   decksList: any[] = [];
   getDecksList: any[] = []
+  loading: boolean = false;
 
   constructor(
     private router: Router,
@@ -20,8 +21,8 @@ export class CreatePokemonDeckComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAlldecksPokemonList();
     this.initForm();
+    this.getAlldecksPokemonList();
   }
 
   initForm() {
@@ -32,8 +33,13 @@ export class CreatePokemonDeckComponent implements OnInit {
   }
 
   getAlldecksPokemonList() {
+    this.loading = true;
     this.service.getAllDecksPokemon().subscribe((result: any) => {
       this.getDecksList = result.data;
+      this.loading = false;
+    }, error => {
+      console.error(error);
+      this.loading = false;
     })
   }
 
@@ -61,16 +67,18 @@ export class CreatePokemonDeckComponent implements OnInit {
 
   save() {
     if (this.form.valid) {
+      this.loading = true;
       const deckName = this.form.get('deckName')!.value;
       const decksList = this.form.get('decksList')!.value;
       const newPokemonDeck = {deckName: deckName, decksList: decksList }
       this.service.createNewDeckPokemon(newPokemonDeck).subscribe((result: any) => {
-        result;
         this.router.navigate(['']);
       },
-        error => console.error(error)
-      );
+      (error) => {
+        console.error(error);
+      }).add(() => {
+        this.loading = false;
+      });
     }
   }
-
 }
