@@ -13,6 +13,7 @@ export class CreatePokemonDeckComponent implements OnInit {
   decksList: any[] = [];
   getDecksList: any[] = [];
   getDeckName: any[] = [];
+  selectedCardsCount: number = 0;
   loading: boolean = false;
 
   constructor(
@@ -29,7 +30,8 @@ export class CreatePokemonDeckComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       deckName: ['', Validators.required],
-      decksList: this.formBuilder.array([], [Validators.required, Validators.minLength(24), Validators.maxLength(60)])
+      decksList: this.formBuilder.array([],
+      [Validators.required, Validators.minLength(24), Validators.maxLength(60)])
     });
   }
 
@@ -59,6 +61,7 @@ export class CreatePokemonDeckComponent implements OnInit {
     const deck = this.getDecksList.find(deck => deck.name === checkedValue);
     const checkArray: FormArray = this.form.get('decksList') as FormArray;
 
+    checked ? this.selectedCardsCount++ : this.selectedCardsCount--;
     checked
       ? checkArray.push(new FormControl(deck))
       : checkArray.controls.forEach((item: any, i: number) => {
