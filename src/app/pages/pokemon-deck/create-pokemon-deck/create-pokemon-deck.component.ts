@@ -29,7 +29,7 @@ export class CreatePokemonDeckComponent implements OnInit {
   initForm() {
     this.form = this.formBuilder.group({
       deckName: ['', Validators.required],
-      decksList: this.formBuilder.array([], Validators.required)
+      decksList: this.formBuilder.array([], [Validators.required, Validators.minLength(24), Validators.maxLength(60)])
     });
   }
 
@@ -52,7 +52,6 @@ export class CreatePokemonDeckComponent implements OnInit {
     const count = this.getDeckName.filter((result: any) => result.deckName === deckName).length;
     return count >= 4 ? (alert("Só é possível repetir o nome do baralho 4 vezes."), true) : false;
   }
-
 
   onCheckboxChange(e: any) {
     const checkedValue = e.target.value;

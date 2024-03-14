@@ -34,6 +34,12 @@
         <label>{{deck.name}}</label>
       </div>
     </div>
+    <span *ngIf="!form.controls['decksList']?.errors?.['minLength'] && form.controls['decksList'].errors">
+      <p style="color: red;">Selecione pelo menos 24 Pokémons!</p>
+    </span>
+    <span *ngIf="form.controls['decksList'].hasError('maxlength')">
+      <p style="color: red;">Selecione no máximo 60 Pokémons!</p>
+    </span>
 
     <div class="flex justify-center mt-4">
       <button
