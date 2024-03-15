@@ -26,9 +26,11 @@ export class PokemonDeckService {
   }
 
   getDecksPokemonById(id: number): Observable<any>{
-    return this.http.get(`${this.url}/${id}`).pipe(
-      map((resp: any) => resp)
-    );
+    return this.http.get(`${this.url}/${id}`);
+  }
+
+  updateDecksPokemon(id: number, deck: any): Observable<any>{
+    return this.http.put(`${this.url}/${id}`, deck);
   }
 
   deleteDeckPokemon(id: number): Observable<any>{

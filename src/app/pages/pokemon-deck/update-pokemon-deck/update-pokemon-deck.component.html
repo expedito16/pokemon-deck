@@ -1,1 +1,78 @@
-<p>update-pokemon-deck works!</p>
+<app-loading [isLoading]="loading"></app-loading>
+
+<header class="fixed top-0 left-0 right-0 flex flex-col sm:flex-row items-center justify-between mb-10 py-3 px-8 bg-gray-800 text-white z-10">
+  <h3 class="text-1xl md:text-2xl lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-0">Editar Baralho</h3>
+  <h3 class="text-1xl md:text-2xl lg:text-xl xl:text-2xl font-bold mb-2 sm:mb-0">Nº de Cartas Selecionadas: {{ selectedCardsCount }}</h3>
+</header>
+
+<div class="shadow md:shadow-md md:shadow-lg md:shadow-xl md:w-12/12 lg:w-10/12 xl:w-12/12 px-10 py-10 mt-10 shadow-lg-solid mx-auto">
+  <form class=" flex flex-col" [formGroup]="form">
+    <div class="flex flex-col mt-4 mb-4">
+      <label class="block mb-2 text-sm font-bold">Nome do baralho*:</label>
+      <input
+        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+        type="text"
+        name="deckName"
+        formControlName="deckName"
+      >
+    </div>
+    <span
+      *ngIf="form.hasError('required', 'deckName') && form.controls['deckName'].dirty"
+      class="text-red-500"
+    >
+      *Nome do baralho é obrigatorio!
+    </span>
+
+    <label class="block mb-2 text-sm font-bold">Selecionar cartas*:</label>
+    <div class="flex items-center flex-wrap mb-5">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div *ngFor="let deck of getDecksList; let i = index;" class="rounded-lg shadow-md p-4 bg-gray-800">
+          <h3 class="text-md font-bold text-white text-center mb-2">Nome: {{ deck.name }}</h3>
+          <img src="{{ deck.images.small }}" alt="" class="mx-auto mb-2">
+          <div class="text-center">
+            <h3 class="text-md font-bold text-white">Detalhes do Pokemon:</h3>
+            <p class="text-sm font-semibold text-white">Tipo: {{ deck.types }}</p>
+            <p class="text-sm font-semibold text-white">SuperTipo: {{ deck.supertype }}</p>
+            <p *ngIf="deck.level" class="text-sm font-semibold text-green-500">Level: {{ deck.level }}</p>
+            <p class="text-sm font-semibold text-green-500">Hp: {{ deck.hp }}</p>
+
+            <input
+              class="form-checkbox h-5 w-5 inline-block align-middle"
+              id="image1"
+              type="checkbox"
+              name="{{deck.name}}"
+              [value]="deck.name"
+              (change)="onCheckboxChange($event)"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <span *ngIf="!form.controls['decksList']?.errors?.['minLength'] && form.controls['decksList'].errors">
+      <p style="color: red;">Selecione pelo menos 24 Pokémons!</p>
+    </span>
+    <span *ngIf="form.controls['decksList'].hasError('maxlength')">
+      <p style="color: red;">Selecione no máximo 60 Pokémons!</p>
+    </span>
+
+    <div class="my-10 mb-10 text-center">
+      <button
+        class="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded mr-3 sm:w-full md:w-1/3 lg:w-1/4 xl:w-1/5"
+        (click)="cancel()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        class="px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded ml-3 sm:w-full md:w-1/3 lg:w-1/4"
+        [disabled]="form.invalid"
+        [class.disabled]="form.invalid"
+        (click)="update()"
+      >
+        Atualizar
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-footer></app-footer>
