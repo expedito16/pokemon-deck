@@ -1,26 +1,71 @@
-# PokemonDeck
+# Projeto de Baralho Pokemon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
+Este é um projeto de uma aplicação de criação e gerenciamento de baralhos Pokémon, desenvolvida utilizando Angular e Tailwind CSS.
 
-## Development server
+E este projeto foi gerado com o [Angular CLI](https://github.com/angular/angular-cli) version 16.2.12.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Funcionalidades
 
-## Code scaffolding
+-> Criar um novo baralho Pokémon;
+-> Adicionar cartas ao baralho;
+-> Visualizar detalhes do baralho;
+-> Atualizar informações do baralho;
+-> Excluir um baralho;
+-> Listar todos os baralhos existentes.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Pré-requisitos
 
-## Build
+Para executar este projeto localmente, você precisa ter o seguinte instalado em sua máquina:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+-> Node.js;
+-> Angular CLI;
+-> Tailwind;
+-> json-server (para simular uma API REST).
 
-## Running unit tests
+## Como executar
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1 - Baixar Node.Js:
+  entre no site `https://nodejs.org/en/download` e baixe a versão do node
+  de acordo com seu sistema operacional e siga os passos de instalação.
 
-## Running end-to-end tests
+2 - Baixar Angular CLI(Version 16):
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Abra seu terminal e execute `npm install -g @angular/cli@16`,
+caso tenha dificultadades para instalar, execute como administrado.
+
+3 - Clone este repositório para o seu ambiente local:
+
+`git clone` https://github.com/seu-usuario/nome-do-repositorio.git
+
+4 - Navegue até o diretório do projeto:
+
+cd nome-do-repositorio.
+
+5 - Instale as dependências do projeto:
+
+executar `npm install`.
+
+6 - Abra outra janela do terminal e inicie o servidor de desenvolvimento do Angular:
+
+executar  `ng serve` e abra seu navegador e abra seu navegador e acesse `http://localhost:4200/`
+para visualizar a aplicação.
+
+7 - Instalar o servidor da API REST (json-server):
+
+executar `npm install json-server`.
+
+8 - Inicie o servidor da API REST (json-server):
+
+entrar na pasta chamada dados e executar `json-server --watch db.json` e abra seu navegador e
+acesse `http://localhost:3000/BaralhosPokemon` para acessar a API.
+
+## Arquivo db.json
+
+O arquivo db.json contém os dados simulados da API REST. Ele inclui as informações dos baralhos Pokémon criados e gerenciados pela aplicação. Você pode adicionar, editar ou excluir dados neste arquivo para simular diferentes cenários de uso da aplicação.
+
+## Autor
+
+Expedito Pereira de Paiva Neto
 
 ## Further help
 
